@@ -8,7 +8,7 @@
 <?PHP
     $name = "";
     $edit = "";
-    $msg = "";
+    $comment = "";
 
     require_once('password.php');
 
@@ -36,7 +36,7 @@ if(!empty($_POST['name']) && !empty($_POST['comment'] && !empty($_POST['pass']))
         $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
         $stmt->bindParam(':id', $edit, PDO::PARAM_INT);
         $stmt->execute();
-        }
+    }
 }
     
 if(!empty($_POST['delete'])){
@@ -68,7 +68,6 @@ if(!empty($_POST['edit'])){
     $pass = $results[0]['password'];
 	$name = $results[0]['name'];
 	$comment = $results[0]['comment'];
-    $msg = $comment;//あとでまとめる
     if($pass == $_POST['pass3']){
         $id = $edit;
     }
@@ -81,7 +80,7 @@ print <<< EOF
 名前:<input type='text' name='name' value='$name'>
 <!--　編集フォームに入力された場合に使う隠しフォーム　-->
 <input type='hidden' name='edit' value='$id'> 
-コメント:<input type='text' name='comment' value='$msg'>
+コメント:<input type='text' name='comment' value='$comment'>
 パスワード:<input type='text' name='pass' value=''>
 <input type='submit' value='送信'>
 </form>
